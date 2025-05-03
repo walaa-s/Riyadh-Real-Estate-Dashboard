@@ -1,66 +1,114 @@
-# 📈 Streamlit Real Estate Dashboard 
+# Riyadh Real Estate Market Insights Dashboard
 
-## Purpose
-This project serves as a showcase for the capabilities of Streamlit to create professional dashboards with ease. The goal is to demonstrate the efficiency of using Streamlit for real estate market analysis, providing interactive and insightful visualizations.
+A Streamlit-based analytics dashboard for exploring and visualizing Riyadh apartment listing data. This project walks through:
 
-## Project Structure
-The project directory is organized as follows:
+1. **Data Collection**  
+2. **Data Cleaning & Visualization**  
+3. **Project Deployment**
 
-- `input/`: Contains the dataset `immo_data.csv` used for analysis.
-- `img/`: Stores images used within the Streamlit app.
-- `.streamlit/`: Configuration files for Streamlit.
-- `app.py`: The main script to run the Streamlit app.
-- `config.py`: Configuration settings for the app.
-- `graphs.py`: Functions to create chart visualizations. 
-- `dynamic_insights.py`: Dynamic insights generation based on data analysis.
-- `process_data.py`: Data preprocessing and cleaning.
-- `Pipfile` and `Pipfile.lock`: Pipenv configuration files for managing dependencies.
+---
 
-## Dataset Information
-The dataset `immo_data.csv` includes real estate listings with details on property features, prices, location, and more. It is utilized to perform various analyses and to demonstrate the data handling capabilities of the app.
-[Source](https://www.kaggle.com/datasets/corrieaar/apartment-rental-offers-in-germany)
-## Analysis and Charts
-The app includes multiple types of analysis and visualizations, such as:
-- Wordcloud and Frequency Barchart of object description
-- Trend analysis over time.
-- Seasonal rental trends.
-- Impact of property features on rental prices.
-- Affordability analysis based on income levels.
-- Comparative analysis of new vs. old properties.
+## 1. Data Collection
 
-The visualizations are created using Plotly Express to provide interactive charts, including line charts, bar charts, and heatmaps.
-## Dynamic Insights
-The application utilizes dynamic insights to assist users in comfortably interpreting the data. These insights add significant value by contextualizing the visualizations and providing actionable takeaways from the analyzed data.
+**Requirements**  
+- Must include a **date** field for each record.  
+- Must include a **location/region** field for each record.  
+- Must contain at least **10,000 rows**.
 
-## Interactivity and Filters
-To enhance the dashboard's interactivity, filters have been integrated, allowing users to refine the data based on property type, region, energy efficiency class, and date range. These filters make the dashboard highly dynamic and tailored to user-specific queries.
-## Packages Used
-The project leverages several Python packages:
-- `streamlit`: Framework for creating the web app.
-- `polars`: High-performance DataFrame library.
-- `pandas`: Data analysis and manipulation.
-- `numpy`: Numerical computing.
-- `plotly-express`: Interactive plotting.
+**In this project**  
+We use `riyadh_apartments_updated.csv`, which has:
+- **`random_date`** → parsed into a `date` column  
+- **`Region`** → normalized into a `region` column  
+- **10,000+** listings spanning 2020–2024  
+
+---
+
+## 2. Data Cleaning & Visualization
+
+### 2.1 Cleaning  
+- Remove rows with missing **date**, **price**, or **region**.  
+- Parse and cast:
+  - `Selling Price (SAR)` → `baseRent` (float)  
+  - `Area (sqm)` → `livingSpace` (float)  
+  - `Bedrooms` → `noRooms` (integer)  
+  - `Property Age (years)` → compute `yearConstructed`  
+  - `Elevator` & `Furnished` → boolean flags  
+- Standardize text columns (`region`, `typeOfFlat`).
+
+### 2.2 Visualization  
+We produce the following interactive charts (via Plotly + Streamlit):
+
+| Section                         | Chart                                                                                                          |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Data Distributions**          | • Histogram of **Selling Price** (SAR)<br>• Histogram of **Year Built**                                       |
+| **Price Trend Over Time**       | • Line chart of median **baseRent** & **totalRent** by date                                                     |
+| **Median Price by Type**        | • Bar chart of median **Selling Price** grouped by **Property Type**                                           |
+| **Elevator & Furnished Impact** | • Grouped bar chart comparing median price “With” vs “Without” each feature                                   |
+| **Map by Region**               | • Mapbox scatter showing each **region**’s median price (color) and property count (marker size)              |
+
+Each chart is accompanied by a short, automatically generated **insight**.
+
+---
+
+## 3. Project Deployment
+
+We deliver a **Streamlit** app:
+
+- **Interactive sidebar filters** for:
+  - Price range slider (SAR)  
+  - Multi-select regions  
+- **Expandable summary** table of the cleaned DataFrame  
+- **Embedded Plotly charts** with insight text below each  
+
+### 3.1 Prerequisites
+
+- Python 3.8+  
+- `pip`  
+
+### 3.2 Installation
+
+1. Clone this repo:
+   ```bash
+   git clone https://github.com/your-org/riyadh-real-estate-dashboard.git
+   cd riyadh-real-estate-dashboard
+Create & activate a virtual environment:
 
 
-![img.png](img/1_page.png)
-![img.png](img/2_page.png)
-![img.png](img/3_page.png)
-![img.png](img/4_page.png)
-![img.png](img/5_page.png)
-## Methods
-The app implements best practices in data preprocessing, interactive filtering, and dynamic insight generation. It utilizes Polars for efficient data processing, especially beneficial for large datasets.
+python -m venv venv
+source venv/bin/activate       # Linux / macOS
+venv\Scripts\activate          # Windows PowerShell
+Install dependencies:
 
-## Getting Started
-To run the app, you need to install the dependencies using Pipenv, which manages packages in a virtual environment. Install Pipenv and the dependencies with the following commands:
+pip install -r requirements.txt
+Note: requirements.txt should list:
 
-```bash
-pip install pipenv
-pipenv install
 
-pipenv run streamlit run app.py
-```
+streamlit
+pandas
+plotly
+Place your riyadh_apartments_updated.csv in the project root.
 
-## Conclusio
-Streamlit's ease of use is evident in the creation of this dashboard. While displaying large datasets in a table can be challenging, using Polars alongside Streamlit can significantly improve performance. This POV project highlights Streamlit's potential to transform data analysis into interactive and user-friendly web applications.
+### 3.3 Running the App
 
+streamlit run app.py
+Visit http://localhost:8501 in your browser to interact with the dashboard.
+
+### File Structure
+
+├── app.py               # Streamlit main script
+├── config.py            # Region-to-lat/lon mappings
+├── process_data.py      # Data loading & cleaning logic
+├── graphs.py            # Plotly chart creation
+├── insights.py          # Auto-generated insight text
+├── requirements.txt     # Python dependencies
+└── riyadh_apartments_updated.csv  # Raw data (10k+ rows)
+
+### How to Extend
+Add new filters (e.g. number of bedrooms, living space).
+
+Swap in FastAPI for a RESTful backend + separate frontend.
+
+Enhance insights with statistical tests or NLP on descriptions.
+
+Enjoy exploring Riyadh’s real-estate market!
+Please open an issue or pull request for questions or improvements.
