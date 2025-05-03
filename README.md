@@ -17,7 +17,6 @@ A Streamlit-based analytics dashboard for exploring and visualizing Riyadh apart
 
 **In this project**  
 We use `riyadh_apartments_updated.csv`, which has:
-- **`random_date`** → parsed into a `date` column  
 - **`Region`** → normalized into a `region` column  
 - **10,000+** listings spanning 2020–2024  
 
