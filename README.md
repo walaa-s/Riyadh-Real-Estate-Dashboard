@@ -123,7 +123,7 @@ riyadh-real-estate-dashboard/
 ├─ config.py            # Region-to-coordinates mappings
 ├─ process_data.py      # Data loading & cleaning
 ├─ graphs.py            # Plotly chart functions
-├─ insights.py          # Auto-generated insights text
+├─ insights.py          # insights
 ├─ requirements.txt     # Python dependencies
 └─ riyadh_apartments_updated.csv  # Raw dataset (10k+ rows)
 ```
