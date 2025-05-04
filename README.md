@@ -1,4 +1,16 @@
 # Riyadh Real Estate Market Insights Dashboard
+![image](https://github.com/user-attachments/assets/794ea08d-7797-4943-af94-2dc6ca6972f9)
+
+link:
+https://weekendproject.streamlit.app/
+
+![image](https://github.com/user-attachments/assets/a5e32ebc-46d7-4c13-8608-5383462153cd)
+![image](https://github.com/user-attachments/assets/8404fe30-208d-4dc3-80e6-0a839d48d8e3)
+![image](https://github.com/user-attachments/assets/8f804048-88f3-4982-b798-fc7dcdbd37fc)
+![image](https://github.com/user-attachments/assets/8c8f479b-63f0-454e-8cf6-8ea702be777e)
+![image](https://github.com/user-attachments/assets/a41e6d19-5ba0-4978-a73b-e667a0f8c125)
+![image](https://github.com/user-attachments/assets/f83e499d-de2e-4585-ae3f-a86a5813b681)
+![image](https://github.com/user-attachments/assets/8e2b948c-b82e-4443-b24b-440180a59119)
 
 A Streamlit-based analytics dashboard for exploring and visualizing apartment listings in Riyadh (10,000+ rows from 2020–2024).
 
