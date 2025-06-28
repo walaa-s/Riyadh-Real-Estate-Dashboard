@@ -1,3 +1,19 @@
+
+This project was developed as a team effort by:
+- Raneem Althqafi
+- Jana Almalki
+- Walaa Almajnuni
+- Waleed Algrafe 
+- Osamah Alrdadi 
+
+Original repository: [RaneemQasim5251/Riyadh-Real-Estate-Dashboard](https://github.com/RaneemQasim5251/Riyadh-Real-Estate-Dashboard)
+
+
+
+
+
+
+
 # Riyadh Real Estate Market Insights Dashboard
 ![image](https://github.com/user-attachments/assets/794ea08d-7797-4943-af94-2dc6ca6972f9)
 
